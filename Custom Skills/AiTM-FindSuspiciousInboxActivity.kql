@@ -1,0 +1,24 @@
+// Find suspicious tokens tagged by AAD "Anomalous Token"  or "BEC financial fraud" alerts
+// Step 1: Find sessions with anomalous token alerts
+let suspiciousSessionIds = materialize(
+    SecurityAlert
+    | where TimeGenerated > ago(7d)
+    | where ProductName == "Azure Active Directory Identity Protection"
+    | where AlertName has_any ("Anomalous Token", "BEC financial fraud")
+    | mv-expand Entity = todynamic(Entities)
+    | where Entity.Type == "cloud-logon-session"
+    | project SessionId = tostring(Entity.SessionId)
+    | distinct SessionId
+);
+// Step 2: Find inbox rules created during suspicious sessions
+let hasSuspiciousSessionIds = isnotempty(toscalar(suspiciousSessionIds));
+CloudAppEvents
+| where hasSuspiciousSessionIds
+| where TimeGenerated > ago(21d)
+| where ActionType == "New-InboxRule"
+| extend SessionId = tostring(RawEventData.SessionId)
+| where SessionId in (suspiciousSessionIds)
+| project TimeGenerated, AccountDisplayName, AccountObjectId, ActionType, 
+          Application, IPAddress, City = tostring(RawEventData.City), 
+          CountryCode, SessionId, RawEventData
+| order by TimeGenerated desc

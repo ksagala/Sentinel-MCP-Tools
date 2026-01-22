@@ -1,0 +1,33 @@
+//Summarizes all countries from which users authenticated to OfficeHome. Useful for identifying unusual geographic patterns. 
+//Includes both interactive and non-interactive sign-ins
+// Summarizes all countries from which users authenticated to OfficeHome
+let InteractiveSignIns = SigninLogs
+| where TimeGenerated > ago(30d) 
+| where AppId == "4765445b-32c6-49b0-83e6-1d93765276ca" //OfficeHome application 
+| where ClientAppUsed == "Browser" 
+| where IsInteractive == true
+| extend LocationInfo = parse_json(LocationDetails)
+| extend Country = tostring(LocationInfo.countryOrRegion)
+| extend SignInType = "Interactive"
+| project TimeGenerated, UserId, UserDisplayName, Country, SignInType;
+let NonInteractiveSignIns = AADNonInteractiveUserSignInLogs
+| where TimeGenerated > ago(30d)
+| where AppId == "4765445b-32c6-49b0-83e6-1d93765276ca"
+| where ClientAppUsed == "Browser"
+| extend LocationInfo = parse_json(LocationDetails)
+| extend Country = tostring(LocationInfo.countryOrRegion)
+| extend SignInType = "NonInteractive"
+| project TimeGenerated, UserId, UserDisplayName, Country, SignInType;
+// Combine and summarize
+InteractiveSignIns
+| union NonInteractiveSignIns
+| summarize Countries = make_set(Country), 
+            CountryCount = dcount(Country),
+            InteractiveSignIns = countif(SignInType == "Interactive"),
+            NonInteractiveSignIns = countif(SignInType == "NonInteractive"),
+            TotalSignInCount = count(),
+            FirstSeen = min(TimeGenerated),
+            LastSeen = max(TimeGenerated)
+            by AccountObjectId = UserId, AccountDisplayName = UserDisplayName
+| extend PrimarySignInType = iff(InteractiveSignIns > NonInteractiveSignIns, "Interactive", "NonInteractive")
+| order by CountryCount desc 

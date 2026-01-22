@@ -47,6 +47,7 @@ Summarize and provide plans
 - "Find users signing in from high-risk locations or IPs with bad reputation"
 
 
+## Example Investigation Flow
 Figure 1: Behavioral analysis of an entity in VS Code using the Sentinel Data Exploration MCP tools. The investigation flow analyzes top 3 users with distinct IP address in the environment. In the demo environment in scope, only 1 user was found with distinct IP address.
 
 <p align="center">
@@ -55,26 +56,26 @@ Figure 1: Behavioral analysis of an entity in VS Code using the Sentinel Data Ex
 
 Figure 2: Summary of IP reputation analysis.
 <p align="center">
-  <img src="../media/BehavioralAnalysis-6.png" alt="IP reputation analysis summary" width="800" />
+  <img src="../media/BehavioralAnalysis-6.png" alt="IP reputation analysis summary" width="700" />
  </p>
 
 Figure 3: IP Address breakdown by success rate.
 <p align="center">
-  <img src="../media/BehavioralAnalysis-7.png" alt="Success rate breakdown" width="800" />
+  <img src="../media/BehavioralAnalysis-7.png" alt="Success rate breakdown" width="700" />
  </p>
 
  Figures 4 & 5: Application usage analysis & IP address security indicators.
  <p align="center">
-  <img src="../media/BehavioralAnalysis-8.png" alt="" width="800" />
+  <img src="../media/BehavioralAnalysis-8.png" alt="" width="700" />
  </p>
 
  <p align="center">
-  <img src="../media/BehavioralAnalysis-9.png" alt="" width="800" />
+  <img src="../media/BehavioralAnalysis-9.png" alt="" width="700" />
  </p>
 
 Figure 6: Recommendations and summary statistics.
  <p align="center">
-  <img src="../media/BehavioralAnalysis-10.png" alt="" width="800" />
+  <img src="../media/BehavioralAnalysis-10.png" alt="" width="700" />
  </p>
 
  References to find out more information:
