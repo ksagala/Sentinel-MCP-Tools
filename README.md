@@ -1,17 +1,17 @@
 # Sentinel-MCP-Tools
 
-Sentinel MCP Tools is a guideline for a collection of Microsoft Sentinel Model Context Protocol (MCP) tools designed to enhance automation, enrichment, and investigation workflows.  The goal of this repository is to provide modular, easy-to-extend instructions how to use Sentinel MCP tool collections that can be integrated into AI agents, or custom SOC automation frameworks.
+Sentinel MCP Tools is a guideline repository for Microsoft Sentinel Model Context Protocol (MCP) tool collections designed to enhance automation, enrichment, and investigation workflows. The goal of this repository is to provide modular, easy-to-extend instructions for using Sentinel MCP tool collections with AI agents or custom SOC automation frameworks.
 
-In most of the examples Vs Code is used as MCP client but the scenarios works in other frameworks and MCP clients as well.
+Most examples use VS Code as the MCP client, but the scenarios also work in other MCP-enabled frameworks and clients.
 
 ## Context.md
-Use `context.md` to give GitHub Copilot + Sentinel MCP server a small, consistent brief for this scenario in VS Code. It keeps the assistant and tools aligned on scope, time window, entities, data sources, and preferred steps—so the same investigation runs the same way each time.
+Use `context.md` to give GitHub Copilot + Sentinel MCP a small, consistent core brief in VS Code. Keep it as the global orchestration layer, then load one scenario module on demand.
 
-- What it is: a lightweight, non-sensitive scenario brief (no secrets).
-- Where to keep it: in your workspace (e.g., `Data Exploration/context.md`) or use the repo template at `templates/context.template.md` and tailor it per run.
-- How to use it in VS Code: if context.md is in the opened workspace, Copilot/MCP picks it up automatically; if it’s elsewhere, upload/attach it in Copilot Chat (or paste the relevant sections).
-- What to include: objective, time window, entities of interest, key data sources/tables, and the workflow steps below.
-- Secrets: store credentials in environment variables or your keychain—do not place tokens in `context.md`.
+- What it is: a lightweight, non-sensitive core playbook (no secrets).
+- Where to keep it: in your workspace as `context.md`, typically created from `templates/context.template.md`.
+- Scenario modules: keep scenario-specific instructions in separate files under `Data Exploration/` (for example `BehavioralAnalysis.md`, `EntityAnalyzer.md`, `EntityInvestigation.md`).
+- How to use it in VS Code: load both files for a run: core `context.md` and one active scenario module.
+- Secrets: store credentials in environment variables or your keychain. Do not place tokens in `context.md` or scenario files.
 
 
 ## Benefits
@@ -36,11 +36,13 @@ Use `context.md` to give GitHub Copilot + Sentinel MCP server a small, consisten
 
 
 ## How to Use Context.md
-1. Prepare a scenario-specific `context.md` for behavioral analysis (data source names, important fields, filters, definitions, risk cues, and preferred query templates).
-2. Start the Sentinel Data Exploration MCP server for your profile/session.
-3. In Copilot Chat (with MCP enabled), attach or reference your `context.md` so the assistant and tools share the same framing. If attachment is unavailable, paste the relevant sections.
-4. Run the workflow below. Iterate by refining `context.md` or adding follow-up prompts as insights emerge.
-5. Capture findings and decisions for handoffs and post-incident reviews.
+1. Create `context.md` from `templates/context.template.md` and set metadata (objective, time window, entities in scope).
+2. Choose one scenario module from `Data Exploration/` that matches the investigation.
+3. Start the MCP server(s) required by the selected module and routing rules in `context.md`.
+4. In Copilot Chat (with MCP enabled), attach/reference both files: `context.md` and the active scenario module.
+5. Run the prompt template from `context.md` and execute the investigation.
+6. If needed, pivot to one additional scenario module and document the pivot and rationale.
+7. Capture findings and decisions for handoffs and post-incident reviews.
 
 ## Prerequisites
 - VS Code with GitHub Copilot and MCP client enabled for this profile.

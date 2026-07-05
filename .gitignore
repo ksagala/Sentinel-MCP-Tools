@@ -23,5 +23,7 @@ logs/
 *.log
 
 # Draft files
-Data Exploration/EntityAnalyzer.md
-media/EntityAnalyzer*.png
+Data Exploration/Graph/BlastRadiusEvaluation.md
+Data Exploration/Graph/WalkablePathDiscovery.md
+Data Exploration/Graph/ExposurePerimeterAnalysis.md
+Data Exploration/Graph/ConnectedNodesAnalysis.md

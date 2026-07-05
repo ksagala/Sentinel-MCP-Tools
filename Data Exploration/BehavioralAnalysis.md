@@ -1,7 +1,7 @@
 # Scenario: Behavioral analysis of user's sign-in activity
 
 ## Introduction
-The goal with the scenario based approach is to enhance investigations and make retro-hunting repeatable, and fast by grounding Sentinel MCP data exploration with a concise, versioned context file that encodes scope, assumptions, and preferred analysis patterns. 
+The goal with the scenario based approach is to enhance investigations and make retro-hunting repeatable, and fast by grounding Sentinel MCP data exploration with a concise, versioned context file that encodes scope, assumptions, and preferred analysis patterns.
 
 Behavioral analysis focuses on user sign-in activity (e.g., unusual IP diversity, geolocation changes, user agent anomalies, and IP reputation checks) using Microsoft Sentinel data lake via the [Sentinel MCP data exploration](https://learn.microsoft.com/en-us/azure/sentinel/datalake/sentinel-mcp-data-exploration-tool) and [Triage tool collections](https://learn.microsoft.com/en-us/azure/sentinel/datalake/sentinel-mcp-triage-tool).
 
@@ -22,7 +22,15 @@ These instructions are evaluated primarily in VS Code with Copilot + Sentinel MC
 
 
 ## Scenario Flow & Instructions
-The following section contains instructions for the MCP server. Copy and paste them into `context.md` and use with your preferred MCP client and an LLM to get the most out of it. 
+Use this file as the active scenario module together with the core context template.
+Do not merge this file into context.md. Attach/load both files and set this file as the active scenario.
+
+> Runtime-relevant sections (load at runtime): When to use?, the Behavioral analysis instructions/investigation flow, and Sample Prompts. The remaining sections (Introduction, Expected Outputs, Example Investigation Flow, References) are human-facing README context and can be skipped at runtime.
+
+Suggested modular run input:
+- Core context: templates/context.template.md
+- Active scenario: Data Exploration/BehavioralAnalysis.md
+- Scope: provide objective, time window, and entities in prompt
 
 
 ## Behavioral analysis of user's sign-in activity – Instructions and investigation flow to use with Sentinel MCP server

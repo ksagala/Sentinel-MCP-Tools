@@ -36,6 +36,16 @@ You guide the investigation with natural language instructions, and the MCP clie
 
 ## Using Entity Investigation
 
+Use this file as the active scenario module together with the core context template.
+Do not merge this file into context.md. Attach/load both files and set this file as the active scenario.
+
+> Runtime-relevant sections (load at runtime): When to use?, Using Entity Investigation (supported entities / what you get / how it works), the investigation flow instructions, and Sample Prompts. The remaining sections (Introduction, What Entity Investigation Does, Key Benefits, Investigation Flow Mapping diagram, Scenario examples) are human-facing README context and can be skipped at runtime.
+
+Suggested modular run input:
+- Core context: templates/context.template.md
+- Active scenario: Data Exploration/EntityInvestigation.md
+- Scope: provide objective, time window, and entities to investigate
+
 **Supported entity types:**
 - Users (Microsoft Entra object ID, UPN, account name)
 - Devices (device name, device ID)
@@ -148,7 +158,7 @@ Figure 4: HIAdmin relationship map - Risk assessment and blast radius summary.
 
 ## Scenario 2 - Trace lateral movement activity for user HIAdmin in the last 30 days
 
-Figure 5: Starting to trace lateral movement activity for targeted user entity HIAdmin. 
+Figure 5: Starting to trace lateral movement activity for targeted user entity HIAdmin.
 
 *Side note: On the figure below, unsuccessful KQL queries created by LLM are seen with red cross at the front of them.*
  <p align="center">
