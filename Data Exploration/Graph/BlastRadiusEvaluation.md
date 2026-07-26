@@ -82,7 +82,7 @@ Figure 1: Add example screenshot or flow summary.
 
 
 <p align="center">
-  <img src="../../media/BlastRadius-2.png" alt="Blast radius analysis analysis figure" width="150" />
+  <img src="../../media/BlastRadius-2.png" alt="Blast radius analysis analysis figure" width="200" />
 </p>
 
 ## References
