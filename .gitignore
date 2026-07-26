@@ -23,8 +23,6 @@ logs/
 *.log
 
 # Draft files
-Data Exploration&Graph/
-Data Exploration/Graph/BlastRadiusEvaluation.md
 Data Exploration/Graph/WalkablePathDiscovery.md
 Data Exploration/Graph/ExposurePerimeterAnalysis.md
 Data Exploration/Graph/ConnectedNodesAnalysis.md
