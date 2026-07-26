@@ -77,12 +77,12 @@ Summarize scope and actions
 Figure 1: Add example screenshot or flow summary.
 
 <p align="center">
-  <img src="../../media/Blastradius-1.png" alt="Blast radius analysis analysis" width="800" />
+  <img src="../../media/BlastRadius-1.png" alt="Blast radius analysis analysis" width="800" />
 </p>
 
 
 <p align="center">
-  <img src="../../media/Blastradius-2.png" alt="Blast radius analysis analysis figure" width="800" />
+  <img src="../../media/BlastRadius-2.png" alt="Blast radius analysis analysis figure" width="800" />
 </p>
 
 ## References
