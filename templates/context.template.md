@@ -31,7 +31,7 @@ Load the matching module on demand instead of duplicating its steps here.
 |---|---|---|---|---|
 | Behavioral analysis | [Data Exploration/BehavioralAnalysis.md](../Data%20Exploration/BehavioralAnalysis.md) | Data Exploration | Triage | Sign-in behavior analytics, anomaly detection, and IP reputation checks |
 | Entity analyzer | [Data Exploration/EntityAnalyzer.md](../Data%20Exploration/EntityAnalyzer.md) | Data Exploration | Triage | Fast AI-assisted risk verdicts for users, URLs, and domains |
-| Entity investigation and relationship analysis | [Data Exploration/EntityInvestigation.md](../Data%20Exploration/EntityInvestigation.md) | Data Exploration | Sentinel Graph, Triage | Deep relationship mapping, lateral movement tracing, and timeline reconstruction |
+| Entity investigation and relationship analysis | [Data Exploration/EntityInvestigation.md](../Data%20Exploration/EntityInvestigation.md) | Data Exploration | Data Exploration graph tools, Triage | Deep relationship mapping, lateral movement tracing, and timeline reconstruction |
 
 **Cross-cutting guardrails for all modules:** defang suspicious IPs, URLs, and domains; filter RFC1918 and tenant-owned indicators; complete Sentinel workspace selection before entity drill-down; wait for user selection before deep analysis.
 
@@ -84,9 +84,11 @@ Execution rules:
 - Use for Sentinel data lake KQL investigations.
 - Use for sign-in analytics, anomaly detection, timeline reconstruction, and table-driven evidence gathering.
 
-### 4) Sentinel Graph (Sentinel Graph)
+### 4) Graph tools (part of the Data Exploration collection)
 - Use for graph investigations such as blast radius, path discovery, exposure perimeter, and graph relationship hunting.
 - Use for entity relationship expansion where graph traversal is required.
+- The graph tools are hosted in the Data Exploration collection at `https://sentinel.microsoft.com/mcp/data-exploration`. There is no separate Sentinel Graph MCP endpoint.
+- Graph calls are billed against the Microsoft Sentinel graph meter, so keep them bounded.
 
 ### 5) Custom XDR Tools (optional / on-demand)
 - Use custom tools only when explicitly needed by the investigation.
@@ -102,7 +104,8 @@ Execution rules:
 - If user asks for Microsoft guidance: Docs MCP first.
 - If user asks for incidents/alerts: Triage first.
 - If user asks for KQL/table evidence or behavior analytics: Data Exploration first.
-- If user asks for blast radius/path/exposure: Sentinel Graph first.
+- If user asks for blast radius/path/exposure: Data Exploration graph tools first.
+- If user asks for CVE, exploitability, TVM, or `ExposureGraphNodes`/`ExposureGraphEdges` evidence: Triage advanced hunting or Data Exploration, depending on which source holds the table.
 - If user explicitly requests a custom hunting flow (for example AiTM): Custom XDR Tools (optional / on-demand).
 
 
@@ -180,7 +183,7 @@ Primary server
 - Data Exploration
 
 Optional secondary
-- Sentinel Graph (when graph traversal is needed)
+- Data Exploration graph tools (when graph traversal is needed)
 - Triage (if incidents are involved)
 
 Flow
@@ -193,7 +196,10 @@ Flow
 
 ### Graph Investigations
 Primary server
-- Sentinel Graph
+- Data Exploration (graph tools)
+
+Optional secondary
+- Triage (Defender advanced hunting for vulnerability and exposure-table evidence)
 
 Flow
 - Blast Radius: enumerate downstream impact from a user/device/entity.

@@ -62,6 +62,24 @@ Scope queries before running them and avoid speculative fan-out.
 > and **Semantics** rows are operational guidance derived from the published tool
 > parameter surface (no `workspaceId` or time parameters exist on any graph tool).
 
+## When graph tools are not enough
+
+Graph tools answer topology questions. They do not carry CVE, exploitability or portal
+posture data, so most real exposure questions need a second source.
+
+| Evidence | Route to | Note |
+|---|---|---|
+| Node labels, relationships, paths, perimeter, blast radius, criticality | Graph tools | Bounded and metered |
+| The value of any node property other than criticality | **Triage** `RunAdvancedHuntingQuery` or `query_lake` against `ExposureGraphNodes` | `find_nodes` filters on properties but does not return their values; the values live under `NodeProperties.rawData` and are not always Boolean |
+| CVEs, severity, exploitability, TVM assessments | **Triage** `RunAdvancedHuntingQuery` or `query_lake` | Confirm which source holds the table before querying |
+| `ExposureGraphNodes`, `ExposureGraphEdges` | **Triage** `RunAdvancedHuntingQuery` or `query_lake` | Confirm which source holds the table before querying |
+| Observed activity | Data Exploration `search_tables` + `query_lake` | Confirmed Sentinel data lake tables only |
+| Initiative scores, metric weights, portal recommendations, Secure Score | Analyst-supplied or separately configured source | No tool in this collection retrieves them |
+
+Confirm availability in the source you intend to use before querying: `search_tables` for
+the data lake, and `FetchAdvancedHuntingTablesOverview` plus
+`FetchAdvancedHuntingTablesDetailedSchema` for advanced hunting.
+
 ## Graph context
 
 `get_graph_context` returns supported labels, properties and graph capabilities.
@@ -83,6 +101,11 @@ Scope queries before running them and avoid speculative fan-out.
 | `find_exposure_perimeter` | `targetName` (required), `minPathLength`, `maxPathLength`, `resultsCountLimit` |
 | `find_connected_nodes` | `sourceNodeLabel` (required), `sourceNodeProperties`, `targetNodeLabel` (required), `targetNodeProperties`, `resultsCountLimit` |
 
+`find_nodes` projects only `Id`, `Name`, and a normalized `Criticality` column, and the
+schema property `criticalityLevel` is returned as `Criticality`. Properties passed in
+`validNodeProperties` act as selection criteria; their values are not returned, so a
+returned node is a candidate rather than a confirmed `true`.
+
 ## Example scenario
 
 See [Blast Radius Evaluation](./BlastRadiusEvaluation.md) for an end-to-end example.
@@ -91,5 +114,6 @@ See [Blast Radius Evaluation](./BlastRadiusEvaluation.md) for an end-to-end exam
 
 - [Data exploration tool collection in Microsoft Sentinel MCP server](https://learn.microsoft.com/en-us/azure/sentinel/datalake/sentinel-mcp-data-exploration-tool)
 - [Graph tools (preview)](https://learn.microsoft.com/en-us/azure/sentinel/datalake/sentinel-mcp-data-exploration-tool#graph-tools-preview)
+- [Triage tool collection in Microsoft Sentinel MCP server](https://learn.microsoft.com/en-us/azure/sentinel/datalake/sentinel-mcp-triage-tool)
 - [What is Microsoft Sentinel graph?](https://learn.microsoft.com/en-us/azure/sentinel/datalake/sentinel-graph-overview)
 - [Plan costs and understand Microsoft Sentinel pricing and billing — graph charges](https://learn.microsoft.com/en-us/azure/sentinel/billing#graph-charges)

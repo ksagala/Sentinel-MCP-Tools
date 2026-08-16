@@ -21,3 +21,5 @@ secrets/
 # Logs and local runtime artifacts
 logs/
 *.log
+
+# Draft graph scenarios
