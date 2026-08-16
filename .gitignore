@@ -21,10 +21,3 @@ secrets/
 # Logs and local runtime artifacts
 logs/
 *.log
-
-# Draft files
-Data Exploration/Graph/WalkablePathDiscovery.md
-Data Exploration/Graph/ExposurePerimeterAnalysis.md
-Data Exploration/Graph/ConnectedNodesAnalysis.md
-Data Exploration/Graph/_GraphToolPrerequisites.md
-Data Exploration/Graph/NodeDiscovery.md

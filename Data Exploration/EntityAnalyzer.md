@@ -6,7 +6,7 @@ This guide shows you how to use Microsoft Sentinel's Entity Analyzer tools to pe
 > (`https://sentinel.microsoft.com/mcp/data-exploration`). It is **not** a graph tool and
 > there is **no separate "Sentinel Graph" MCP server endpoint**. For blast radius, path
 > discovery, exposure perimeter and node discovery, see the
-> [Graph](./Graph/_GraphToolPrerequisites.md) scenario modules — those tools have
+> [Graph tools guide](./Graph/README.md) — those tools have
 > different constraints (no `workspaceId`, no time window, no UPN support).
 
 ## Introduction
@@ -104,8 +104,8 @@ Defang indicators
 - Defang all malicious/suspicious URLs and domains in prompts and output (`hxxps://evil[.]com/path`, `evil[.]com`)
 Escalate to graph when scope matters
 - Once an entity is assessed as risky, hand the resolved entity to
-  [BlastRadiusEvaluation](./Graph/BlastRadiusEvaluation.md) or
-  [ExposurePerimeterAnalysis](./Graph/ExposurePerimeterAnalysis.md) to determine impact.
+  [Blast Radius Evaluation](./Graph/BlastRadiusEvaluation.md) or use the exposure
+  perimeter tool described in the [Graph tools guide](./Graph/README.md) to determine impact.
   Resolve the UPN to a display name / object ID first — graph tools do not accept UPNs
 
 
